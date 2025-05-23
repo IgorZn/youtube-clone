@@ -9,6 +9,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import Link from 'next/link'
+import { useAuth, useClerk } from '@clerk/clerk-react'
 
 const items = [
   { title: 'Home', url: '/', icon: HomeIcon },
@@ -17,6 +18,9 @@ const items = [
 ]
 
 export const MainSection = () => {
+  const { isSignedIn } = useAuth()
+  const clerk = useClerk()
+  console.log('isSignedIn', !isSignedIn)
   return (
     <SidebarGroup>
       <SidebarGroupContent>
@@ -27,7 +31,12 @@ export const MainSection = () => {
                 tooltip={item.title}
                 asChild
                 isActive={false} // TODO: change to look at current path
-                onClick={() => {}} //TODO: do something
+                onClick={e => {
+                  e.preventDefault()
+                  if (!isSignedIn && item.auth) {
+                    return clerk.openSignIn()
+                  }
+                }}
               />
               <Link href={item.url} className='flex items-center gap-4'>
                 <item.icon />
