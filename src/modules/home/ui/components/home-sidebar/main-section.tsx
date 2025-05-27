@@ -9,7 +9,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import Link from 'next/link'
-import { useAuth, useClerk } from '@clerk/clerk-react'
+import { useAuth, useClerk } from '@clerk/nextjs'
 
 const items = [
   { title: 'Home', url: '/', icon: HomeIcon },
@@ -20,7 +20,7 @@ const items = [
 export const MainSection = () => {
   const { isSignedIn } = useAuth()
   const clerk = useClerk()
-  console.log('isSignedIn', !isSignedIn)
+
   return (
     <SidebarGroup>
       <SidebarGroupContent>
@@ -32,16 +32,17 @@ export const MainSection = () => {
                 asChild
                 isActive={false} // TODO: change to look at current path
                 onClick={e => {
-                  e.preventDefault()
+                  console.log(isSignedIn, item.auth)
                   if (!isSignedIn && item.auth) {
-                    return clerk.openSignIn()
+                    e.preventDefault()
+                    clerk.openSignIn()
                   }
-                }}
-              />
-              <Link href={item.url} className='flex items-center gap-4'>
-                <item.icon />
-                <span className={'text-sm'}>{item.title}</span>
-              </Link>
+                }}>
+                <Link href={item.url} className='flex items-center gap-4'>
+                  <item.icon />
+                  <span className={'text-sm'}>{item.title}</span>
+                </Link>
+              </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>

@@ -1,9 +1,7 @@
 import React from 'react'
 
-function Page(props) {
-  return (
-    <div></div>
-  )
+function Page() {
+  return <div>Only authenticated users can see this</div>
 }
 
 export default Page
