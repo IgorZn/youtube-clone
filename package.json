@@ -10,7 +10,9 @@
     "drizzle:push": "drizzle-kit push",
     "drizzle:generate": "drizzle-kit generate",
     "drizzle:migrate": "drizzle-kit migrate",
-    "drizzle:studio": "drizzle-kit studio"
+    "drizzle:studio": "drizzle-kit studio",
+    "dev:webhook": "ngrok http --domain=viable-terminally-cow.ngrok-free.app 3000",
+    "dev:all": "concurrently \"bun dev:webhook\" \"bun dev\""
   },
   "dependencies": {
     "@clerk/nextjs": "^6.20.0",
@@ -46,6 +48,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "concurrently": "9.1.2",
     "date-fns": "^4.1.0",
     "dotenv": "16.5.0",
     "drizzle-orm": "0.43.1",
@@ -61,6 +64,7 @@
     "react-resizable-panels": "^3.0.2",
     "recharts": "^2.15.3",
     "sonner": "^2.0.3",
+    "svix": "1.66.0",
     "tailwind-merge": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
